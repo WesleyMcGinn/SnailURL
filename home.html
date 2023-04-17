@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>SnailURL</title>
+    <script>
+      var urlParameters = {
+        link : location.href,
+        get : function(variable_name) {
+          if (this.link.search(variable_name + "=") >= 0) {
+            this.preparedValue = '';
+            for (i = this.link.search(variable_name + "=") + variable_name.length + 1; i < this.link.length; i++) {
+              if (this.link[i] == '&' || this.link[i] == '/' || this.link[i] == '?') {
+                i = this.link.length;
+              } else {
+                this.preparedValue += this.link[i];
+              }
+            }
+            return this.preparedValue;
+          } else {
+            return null;
+          }
+        },
+        has : function(variable_name) {
+          if (this.link.search(variable_name + "=") >= 0) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
