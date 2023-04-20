@@ -8,7 +8,7 @@
           if (this.link.search(variable_name + "=") >= 0) {
             this.preparedValue = '';
             for (i = this.link.search(variable_name + "=") + variable_name.length + 1; i < this.link.length; i++) {
-              if (this.link[i] == '&' || this.link[i] == '/' || this.link[i] == '?') {
+              if (this.link[i] == '&' || this.link[i] == '?') {
                 i = this.link.length;
               } else {
                 this.preparedValue += this.link[i];
@@ -27,8 +27,14 @@
           }
         }
       }
+      if (urlParameters.has("r") && !urlParameters.has("t")) {
+        location.href = urlParameters.get("r");
+      } else if (urlParameters.has("m")) {
+        document.getElementById("message").innerHTML = urlParameters.get("m");
+      }
     </script>
   </head>
   <body>
+    <div id="message"></div>
   </body>
 </html>
