@@ -1,40 +1,36 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>SnailURL</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./urlParameters.js"></script>
+    <script src="./userSystem.js"></script>
     <script>
-      var urlParameters = {
-        link : location.href,
-        get : function(variable_name) {
-          if (this.link.search(variable_name + "=") >= 0) {
-            this.preparedValue = '';
-            for (i = this.link.search(variable_name + "=") + variable_name.length + 1; i < this.link.length; i++) {
-              if (this.link[i] == '&' || this.link[i] == '?') {
-                i = this.link.length;
-              } else {
-                this.preparedValue += this.link[i];
-              }
-            }
-            return this.preparedValue;
+      function setup() {
+        if (user.hasName()) {
+          document.getElementById("name").value = user.getName();
+        }
+        if (urlParameters.has("r") && !urlParameters.has("an") && !urlParameters.has("ap")) {
+          location.href = urlParameters.get("r");
+        } else if (urlParameters.has("m")) {
+          document.body.innerHTML = urlParameters.get("m");
+        } else if (urlParameters.has("r") && urlParameters.has("an")) {
+          var allowed = eval(urlParameters.get("an"));
+          if (allowed.indexOf(user.getName()) != -1) {
+            location.href = urlParameters.get("r");
           } else {
-            return null;
-          }
-        },
-        has : function(variable_name) {
-          if (this.link.search(variable_name + "=") >= 0) {
-            return true;
-          } else {
-            return false;
+            document.getElementById("sign_in").style.visibility = 'visible';
           }
         }
       }
-      if (urlParameters.has("r") && !urlParameters.has("t")) {
-        location.href = urlParameters.get("r");
-      } else if (urlParameters.has("m")) {
-        document.getElementById("message").innerHTML = urlParameters.get("m");
-      }
     </script>
   </head>
-  <body>
-    <div id="message"></div>
+  <body onload="setup()">
+    <h1>SnailURL</h1>
+    <div id="sign_in">
+      <h2>Plase sign in to continue:</h2>
+      <label for="name">Your Name:</label>
+      <input id="name" type="text" oninput="user.setName(this.value)">
+    </div>
   </body>
 </html>

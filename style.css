@@ -1,0 +1,11 @@
+body {
+    text-align: center;
+    background-color: #0077e7;
+    background-image: linear-gradient(cyan, #0077e7);
+    background-attachment: fixed;
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
+#sign_in {
+    visibility: hidden;
+}
