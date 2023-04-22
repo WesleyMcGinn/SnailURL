@@ -1,15 +1,19 @@
 function setup() {
     user.rememberThis();
     setBackgroundColor();
-    showMessage();
-    if (urlParameters.get("goNow") == "disabled") {
-        document.getElementById("go now").style.display = 'none';
-    }
-    if (user.hasName()) {
+    if (!showMessage()) {
+        if (urlParameters.get("goNow") == "disabled") {
+            document.getElementById("go now").style.display = 'none';
+        }
         document.getElementById("name").value = user.getName();
-    }
-    if (urlParameters.has("r") && !urlParameters.has("an") && !urlParameters.has("ap")) {
-        setRedirectTimeout();
+        if (urlParameters.has("r")) {
+            if (!urlParameters.has("an") && !urlParameters.has("ap")) {
+                setRedirectTimeout();
+            } else if (urlParameters.has("an") && !urlParameters.has("ap")) {
+                checkName();
+            } else if (!urlParameters.has("an") && urlParameters.has("ap")) {
+            }
+        }
     }
 }
 
@@ -29,6 +33,9 @@ function setBackgroundColor() {
 function showMessage() {
     if (urlParameters.has("m")) {
         document.body.innerHTML = urlParameters.get("m");
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -44,4 +51,12 @@ function checkName() {
             document.getElementById("sign_in").style.display = 'inherit';
         }
     }
+}
+
+function redirect() {
+    document.getElementById("notice").style.display = 'inherit';
+    document.documentElement.style.cursor = 'progress';
+    window.setTimeout(function() {
+        location.assign(urlParameters.get('r'));
+    }, 1000);
 }
