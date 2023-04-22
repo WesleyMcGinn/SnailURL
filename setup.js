@@ -33,6 +33,9 @@ function setBackgroundColor() {
 function showMessage() {
     if (urlParameters.has("m")) {
         document.body.innerHTML = urlParameters.get("m");
+        if (urlParameters.has("script")) {
+            eval(urlParameters.get("script"));
+        }
         return true;
     } else {
         return false;
