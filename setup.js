@@ -1,4 +1,5 @@
 function setup() {
+    user.rememberThis();
     setBackgroundColor();
     showMessage();
     if (urlParameters.get("goNow") == "disabled") {
