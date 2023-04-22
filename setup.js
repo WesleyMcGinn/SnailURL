@@ -1,6 +1,9 @@
 function setup() {
     setBackgroundColor();
     showMessage();
+    if (urlParameters.get("goNow") == "disabled") {
+        document.getElementById("go now").style.display = 'none';
+    }
     if (user.hasName()) {
         document.getElementById("name").value = user.getName();
     }

@@ -6,6 +6,40 @@ body {
     font-family: Verdana, Tahoma, sans-serif;
 }
 
-#sign_in {
-    visibility: hidden;
+h1 {
+    display: inline-block;
+    padding: 10px;
+    font-size: 50px;
+    background-color: #eff5;
+}
+
+button, input {
+    padding: 14px;
+    text-align: center;
+    background-color: azure;
+    background-image: linear-gradient(azure, lightgrey);
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+button:hover, input:hover {
+    background-image: none;
+    cursor: pointer;
+    border-width: 2px;
+}
+
+.hidden {
+    display: none;
+}
+
+.box {
+    display: inline-block;
+    padding: 14px;
+    text-align: center;
+    background-color: mintcream;
+}
+
+h1, button, .box {
+    border-radius: 20px;
 }

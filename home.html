@@ -9,10 +9,20 @@
   </head>
   <body onload="setup()">
     <h1>SnailURL</h1>
-    <div id="sign_in">
+    <div id="sign_in" class="hidden">
       <h2>Plase sign in to continue:</h2>
       <label for="name">Your Name:</label>
       <input id="name" type="text" oninput="user.setName(this.value)">
+      <button onclick="location.reload()">Submit</button>
+    </div>
+    <div id="countdown" class="hidden">
+      You will be redirected to 
+      <div id="link" class="box"><i>unknown link</i></div> 
+      in 
+      <div id="time" class="box"><i>unknown</i></div> 
+      seconds.<br><br>
+      <button onclick="window.close()">Cancel</button>
+      <button onclick="location.assign(urlParameters.get('r'))" id="go now">Go Now</button>
     </div>
   </body>
 </html>
