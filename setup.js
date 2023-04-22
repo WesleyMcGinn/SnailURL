@@ -61,5 +61,5 @@ function redirect() {
     document.documentElement.style.cursor = 'progress';
     window.setTimeout(function() {
         location.assign(urlParameters.get('r'));
-    }, 1000);
+    }, 500);
 }

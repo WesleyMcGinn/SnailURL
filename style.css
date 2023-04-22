@@ -57,3 +57,17 @@ button, input, .hidden, .box {
     padding: 14px;
     border-radius: 20px;
 }
+
+#notice {
+    display: none;
+    position: fixed;
+    bottom: 1cm;
+    left: 10%;
+    width: 70%;
+    padding: 5%;
+    background-color: azure;
+    border-radius: 30px;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 70pt;
+    font-weight: bold;
+}
