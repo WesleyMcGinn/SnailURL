@@ -43,6 +43,27 @@ function showMessage() {
 }
 
 function setRedirectTimeout() {
+    if (urlParameters.has("t")) {
+        if (urlParameters.has("t") && urlParameters.has("r")) {
+            window.setTimeout(function() {
+                redirect();
+            }, 1000*parseFloat(urlParameters.get("t")));
+            document.getElementById("link").innerHTML = "<a href='" + urlParameters.get("r") + "'>" + urlParameters.get("r") + "</a>";
+            document.getElementById("time").innerHTML = urlParameters.get("t");
+            if (urlParameters.get("goNow") == "disabled") {
+                document.getElementById("link").style.display = 'none';
+                document.getElementById("countdown").innerHTML = document.getElementById("countdown").innerHTML.replace("You will be redirected to", "You will be redirected");
+            }
+            document.getElementById("countdown").style.display = 'inherit';
+            countdown = parseFloat(urlParameters.get("t"));
+            window.setInterval(function() {
+                if (countdown > 0) { countdown--; }
+                document.getElementById("time").innerHTML = countdown.toString();
+            }, 1000);
+        }
+    } else {
+        redirect();
+    }
 }
 
 function checkName() {
