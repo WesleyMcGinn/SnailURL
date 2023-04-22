@@ -1,47 +1,59 @@
 body {
+    margin-left: 10%;
+    margin-right: 10%;;
     text-align: center;
     background-color: #0077e7;
     background-image: linear-gradient(cyan, #0077e7);
     background-attachment: fixed;
     font-family: Verdana, Tahoma, sans-serif;
-    font-size: 17px;
+    font-size: 20px;
+}
+
+body:hover {
+    cursor: default;
 }
 
 h1 {
     display: inline-block;
     padding: 10px;
+    background-color: #eff5;
     font-family: Righteous, Verdana, Tahoma, sans-serif;
     font-size: 50px;
-    background-color: #eff5;
+    border-radius: 20px;
 }
 
 button, input {
-    padding: 14px;
     text-align: center;
     background-color: azure;
     background-image: linear-gradient(azure, lightgrey);
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
     border-color: black;
 }
 
 button:hover, input:hover {
+    background-color: azure;
     background-image: none;
     cursor: pointer;
-    border-width: 2px;
+}
+
+input:hover {
+    cursor: text;
 }
 
 .hidden {
     display: none;
+    background-color: #eff5;
 }
 
 .box {
     display: inline-block;
-    padding: 14px;
     text-align: center;
     background-color: mintcream;
+    font-family: Righteous, Verdana, Tahoma, sans-serif;
 }
 
-h1, button, .box {
+button, input, .hidden, .box {
+    padding: 14px;
     border-radius: 20px;
 }
