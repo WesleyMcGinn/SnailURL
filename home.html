@@ -5,37 +5,7 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./urlParameters.js"></script>
     <script src="./userSystem.js"></script>
-    <script>
-      function setup() {
-        if (user.hasName()) {
-          document.getElementById("name").value = user.getName();
-        }
-        if (urlParameters.has("r") && !urlParameters.has("an") && !urlParameters.has("ap")) {
-          location.href = urlParameters.get("r");
-        } else {
-          if (urlParameters.has("C")) {
-            document.body.style.backgroundColor = urlParameters.get("C");
-            document.body.style.backgroundImage = "none";
-          } else if (urlParameters.has("c")) {
-            document.body.style.backgroundColor = urlParameters.get("c");
-            document.body.style.backgroundImage = "none";
-          }
-          if (urlParameters.has("C") && urlParameters.has("c")) {
-            document.body.style.backgroundImage = "linear-gradient(" + urlParameters.get("c") + ", " + urlParameters.get("C") + ")";
-          }
-          if (urlParameters.has("m")) {
-            document.body.innerHTML = urlParameters.get("m");
-          } else if (urlParameters.has("r") && urlParameters.has("an")) {
-            var allowed = eval(urlParameters.get("an"));
-            if (allowed.indexOf(user.getName()) != -1) {
-              location.href = urlParameters.get("r");
-            } else {
-              document.getElementById("sign_in").style.visibility = 'visible';
-            }
-          }
-        }
-      }
-    </script>
+    <script src="./setup.js"></script>
   </head>
   <body onload="setup()">
     <h1>SnailURL</h1>
