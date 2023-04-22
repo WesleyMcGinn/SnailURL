@@ -12,6 +12,7 @@ function setup() {
             } else if (urlParameters.has("an") && !urlParameters.has("ap")) {
                 checkName();
             } else if (!urlParameters.has("an") && urlParameters.has("ap")) {
+                document.getElementById("gateway").style.display = 'inherit';
             }
         }
     }
@@ -83,4 +84,16 @@ function redirect() {
     window.setTimeout(function() {
         location.assign(urlParameters.get('r'));
     }, 500);
+}
+
+function tryPass() {
+    if (urlParameters.has("r") && urlParameters.has("ap")) {
+        if (urlParameters.get("ap") == document.getElementById("password").value) {
+            localStorage.rights++;
+            setRedirectTimeout();
+        } else {
+            localStorage.wrongs++;
+            location.assign("file:///Users/24wmcginn/Documents/GitHub/SnailURL/home.html?m=%3Ch1%3EYOU%20ENTERED%20THE%20WRONG%20PASSWORD!%3C/h1%3E%3Cp%3EIf%20SnailURL%20detects%20too%20much%20suspicious%20activity%20on%20this%20device,%20you%20may%20eventually%20be%20%3Cb%3EBLOCKED%3C/b%3E%20from%20several%20features%20on%20the%20site.%20%3Ci%3EPlease%20be%20cautious.%3C/i%3E%3C/p%3E%3Cbr%3E%3Cbr%3E%3Cdiv%20id=%27a%27%20class=%27box%27%3E...%3C/div%3E&C=black&c=red&script=document.getElementById(%27a%27).innerHTML%20=%20localStorage.wrongs");
+        }
+    }
 }

@@ -17,6 +17,12 @@
       <input id="name" type="text" oninput="user.setName(this.value)">
       <button onclick="location.reload()">Submit</button>
     </div>
+    <div id="gateway" class="hidden">
+      <p>You need a password to access the page you are trying to get to.</p>
+      <label for="password">Password:</label>
+      <input id="password" type="password">
+      <button onclick="tryPass()">Submit</button>
+    </div>
     <div id="countdown" class="hidden">
       You will be redirected to 
       <div id="link" class="box"><i>unknown link</i></div> 
