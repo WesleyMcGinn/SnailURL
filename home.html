@@ -4,6 +4,7 @@
     <title>SnailURL</title>
     <link rel="stylesheet" href="./fonts/Righteous/righteous.css">
     <link rel="stylesheet" href="./style.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="./urlParameters.js"></script>
     <script src="./userSystem.js"></script>
     <script src="./setup.js"></script>
@@ -29,7 +30,7 @@
       in 
       <div id="time" class="box"><i>unknown</i></div> 
       seconds.<br><br>
-      <button onclick="history.go(-1);window.close();location.assign('about:blank')">Cancel</button>
+      <button onclick="history.go(-1);leave()">Cancel</button>
       <button onclick="redirect()" id="go now">Go Now</button>
     </div>
     <div id="notice">
