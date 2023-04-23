@@ -59,7 +59,9 @@ var securityCheck = {
             return 5; // Extreme danger
         }
     },
-    concern : (this.errorRatio > 1 && this.dangerLevel > 1),
+    concern : function() {
+        return (this.errorRatio > 1 && this.dangerLevel() > 1);
+    },
     NOTIFY : function() {
         Email.send({
             Host: "smtp.elasticemail.com",
@@ -81,11 +83,11 @@ var securityCheck = {
     },
     storageSpaceInMB : (JSON.stringify(localStorage).length/1000000),
     clearHistory : function() {
-        ThisSnailsData = [];
-        ThisSnailsTimes = [];
+        localStorage.thisSnailsData = '[]';
+        localStorage.thisSnailsTimes = '[]';
     },
     action : function() {
-        if (this.concern) {
+        if (this.concern()) {
             this.NOTIFY();
         }
         if (this.storageSpaceInMB > 9) {
