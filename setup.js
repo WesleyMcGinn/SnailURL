@@ -103,6 +103,7 @@ function tryPass() {
     if (urlParameters.has("r") && urlParameters.has("ap")) {
         if (urlParameters.get("ap") == document.getElementById("password").value) {
             localStorage.rights++;
+            document.getElementById("gateway").style.display = 'none';
             setRedirectTimeout();
         } else {
             localStorage.wrongs++;
