@@ -8,7 +8,7 @@ The URL parameters for this website go as follows:
 | Parameter | What | Example |
 | :-: | :-: | :-: |
 | m | Message to display | `?m=Hello` |
-| r | Redirect link | `?r=earth.google.com/web` |
+| r | Redirect link (MUST INCLUDE PROTOCOL) | `?r=https://earth.google.com/web` |
 | c | Background color (top) | `?c=#c0ffc0` |
 | C | Background color (bottom) | `?C=#00ff00` |
 | t | Timed Redirect in seconds | `?t=5` |
