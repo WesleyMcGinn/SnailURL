@@ -87,6 +87,18 @@ function redirect() {
     }, 500);
 }
 
+function tryName() {
+    if (urlParameters.has("r") && urlParameters.has("an")) {
+        var allowed = eval(urlParameters.get("an"));
+        if (allowed.indexOf(user.getName()) != -1) {
+            setRedirectTimeout();
+            document.getElementById("sign_in").style.display = 'none';
+        } else {
+            location.assign("file:///Users/24wmcginn/Documents/GitHub/SnailURL/home.html?m=%3Cp%3EYou%20do%20not%20have%20access%20to%20this%20page.%3C/p%3E%3Cbutton%20onclick=%27window.close();leave()%27%3EOkay%3C/button%3E&C=gold&c=yellow");
+        }
+    }
+}
+
 function tryPass() {
     if (urlParameters.has("r") && urlParameters.has("ap")) {
         if (urlParameters.get("ap") == document.getElementById("password").value) {
