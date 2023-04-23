@@ -100,6 +100,12 @@ var urlCode = {
         while (this.decoding.search("%40") >= 0) {
             this.decoding = this.decoding.replace("%40", "@");
         }
+        while (this.decoding.search("%5B") >= 0) {
+            this.decoding = this.decoding.replace("%5B", "[");
+        }
+        while (this.decoding.search("%5D") >= 0) {
+            this.decoding = this.decoding.replace("%5D", "]");
+        }
         return this.decoding;
     }
 }
