@@ -1,12 +1,12 @@
 body {
     margin-left: 10%;
-    margin-right: 10%;;
+    margin-right: 10%;
     text-align: center;
     background-color: #0077e7;
     background-image: linear-gradient(cyan, #0077e7);
     background-attachment: fixed;
     font-family: Verdana, Tahoma, sans-serif;
-    font-size: 20px;
+    font-size: 15pt;
 }
 
 body:hover {
@@ -18,7 +18,7 @@ h1 {
     padding: 10px;
     background-color: #eff5;
     font-family: Righteous, Verdana, Tahoma, sans-serif;
-    font-size: 50px;
+    font-size: 35pt;
     border-radius: 20px;
 }
 
@@ -68,6 +68,29 @@ button, input, .hidden, .box {
     background-color: azure;
     border-radius: 30px;
     font-family: Verdana, Tahoma, sans-serif;
-    font-size: 70pt;
+    font-size: 50pt;
     font-weight: bold;
+}
+
+@media (max-width: 850px) {
+    body {
+        margin-left: 1%;
+        margin-right: 1%;
+        font-size: 12pt;
+    }
+    h1 {
+        font-size: 27pt;
+    }
+    #notice {
+        font-size: 20pt;
+    }
+}
+
+@media (max-width: 280px) {
+    h1 {
+        font-size: 20pt;
+    }
+    #notice {
+        font-size: 12pt;
+    }
 }

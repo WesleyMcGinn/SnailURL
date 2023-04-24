@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SnailURL</title>
     <link rel="stylesheet" href="./fonts/Righteous/righteous.css">
     <link rel="stylesheet" href="./style.css">
@@ -11,20 +12,20 @@
   </head>
   <body onload="setup()">
     <h1>SnailURL</h1>
-    <div id="sign_in" class="hidden">
+    <section id="sign_in" class="hidden">
       <p>The page you are trying to access is only available to certain people.</p>
       <p>Plase sign in to continue:</p>
       <label for="name">Your Username:</label>
       <input id="name" type="text" oninput="user.setName(this.value)">
       <button onclick="tryName()">Submit</button>
-    </div>
-    <div id="gateway" class="hidden">
+    </section>
+    <section id="gateway" class="hidden">
       <p>You need a password to access the page you are trying to get to.</p>
       <label for="password">Password:</label>
       <input id="password" type="password">
       <button onclick="tryPass()">Submit</button>
-    </div>
-    <div id="countdown" class="hidden">
+    </section>
+    <section id="countdown" class="hidden">
       You will be redirected to 
       <div id="link" class="box"><i>unknown link</i></div> 
       in 
@@ -32,9 +33,9 @@
       seconds.<br><br>
       <button onclick="history.go(-1);leave()">Cancel</button>
       <button onclick="redirect()" id="go now">Go Now</button>
-    </div>
-    <div id="notice">
+    </section>
+    <section id="notice">
       Redirecting...
-    </div>
+    </section>
   </body>
 </html>
