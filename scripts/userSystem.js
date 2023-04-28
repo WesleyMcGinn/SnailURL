@@ -28,7 +28,7 @@ var user = {
             ThisSnailsData = [];
             ThisSnailsTimes = [];
             localStorage.rights = 0;
-            localStorage.wronts = 0;
+            localStorage.wrongs = 0;
             localStorage.randomID = Math.random();
         } else {
             ThisSnailsData = eval(localStorage.thisSnailsData);
