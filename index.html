@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<!-- This is an experimental compressed version of all of SnailURL's files. -->
+<!-- For the actual page, visit https://wesleymcginn.github.io/SnailURL/home.html -->
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SnailURL</title>
+
+    <style>
+
+@font-face {
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./fonts/Righteous/r1.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./fonts/Righteous/r2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    background-color: #0077e7;
+    background-image: linear-gradient(cyan, #0077e7);
+    background-attachment: fixed;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 15pt;
+}
+
+body:hover {
+    cursor: default;
+}
+
+h1 {
+    display: inline-block;
+    padding: 10px;
+    background-color: #eff5;
+    font-family: Righteous, Verdana, Tahoma, sans-serif;
+    font-size: 35pt;
+    border-radius: 20px;
+}
+
+button, input {
+    text-align: center;
+    background-color: azure;
+    background-image: linear-gradient(azure, lightgrey);
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+}
+
+button:hover, input:hover {
+    background-color: azure;
+    background-image: none;
+    cursor: pointer;
+}
+
+input:hover {
+    cursor: text;
+}
+
+.hidden {
+    display: none;
+    background-color: #eff5;
+}
+
+.box {
+    display: inline-block;
+    text-align: center;
+    background-color: mintcream;
+    font-family: Righteous, Verdana, Tahoma, sans-serif;
+}
+
+button, input, .hidden, .box {
+    padding: 14px;
+    border-radius: 20px;
+}
+
+.snail {
+    position: fixed;
+    bottom: -5px;
+    left: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+#notice {
+    display: none;
+    position: fixed;
+    bottom: 1cm;
+    left: 10%;
+    width: 70%;
+    padding: 5%;
+    background-color: azure;
+    border-radius: 30px;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 50pt;
+    font-weight: bold;
+}
+
+@media (max-width: 850px) {
+    body {
+        margin-left: 1%;
+        margin-right: 1%;
+        font-size: 12pt;
+    }
+    h1 {
+        font-size: 27pt;
+    }
+    #notice {
+        font-size: 20pt;
+    }
+}
+
+@media (max-width: 280px) {
+    h1 {
+        font-size: 20pt;
+    }
+    #notice {
+        font-size: 12pt;
+    }
+}
+
+    </style>
+
+    <script>
+
+var Email = { send: function (a) { return new Promise(function (n, e) { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) { n(e) }) }) }, ajaxPost: function (e, n, t) { var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { var e = a.responseText; null != t && t(e) }, a.send(n) }, ajax: function (e, n) { var t = Email.createCORSRequest("GET", e); t.onload = function () { var e = t.responseText; null != n && n(e) }, t.send() }, createCORSRequest: function (e, n) { var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t } };
+
+var urlCode = {
+    decode : function(urlEncoded) {
+        this.decoding = urlEncoded;
+        while (this.decoding.search("%3C") >= 0) {
+            this.decoding = this.decoding.replace("%3C", "<");
+        }
+        while (this.decoding.search("%3E") >= 0) {
+            this.decoding = this.decoding.replace("%3E", ">");
+        }
+        while (this.decoding.search("%22") >= 0) {
+            this.decoding = this.decoding.replace("%22", '"');
+        }
+        while (this.decoding.search("%20") >= 0) {
+            this.decoding = this.decoding.replace("%20", " ");
+        }
+        while (this.decoding.search("%21") >= 0) {
+            this.decoding = this.decoding.replace("%21", "!");
+        }
+        while (this.decoding.search("%23") >= 0) {
+            this.decoding = this.decoding.replace("%23", "#");
+        }
+        while (this.decoding.search("%24") >= 0) {
+            this.decoding = this.decoding.replace("%24", "$");
+        }
+        while (this.decoding.search("%25") >= 0) {
+            this.decoding = this.decoding.replace("%25", "%");
+        }
+        while (this.decoding.search("%26") >= 0) {
+            this.decoding = this.decoding.replace("%26", "&");
+        }
+        while (this.decoding.search("%27") >= 0) {
+            this.decoding = this.decoding.replace("%27", "'");
+        }
+        while (this.decoding.search("%28") >= 0) {
+            this.decoding = this.decoding.replace("%28", "(");
+        }
+        while (this.decoding.search("%29") >= 0) {
+            this.decoding = this.decoding.replace("%29", ")");
+        }
+        while (this.decoding.search("%2A") >= 0) {
+            this.decoding = this.decoding.replace("%2A", "*");
+        }
+        while (this.decoding.search("%2B") >= 0) {
+            this.decoding = this.decoding.replace("%2B", "+");
+        }
+        while (this.decoding.search("%2C") >= 0) {
+            this.decoding = this.decoding.replace("%2C", ",");
+        }
+        while (this.decoding.search("%2D") >= 0) {
+            this.decoding = this.decoding.replace("%2D", "-");
+        }
+        while (this.decoding.search("%2E") >= 0) {
+            this.decoding = this.decoding.replace("%2E", ".");
+        }
+        while (this.decoding.search("%2F") >= 0) {
+            this.decoding = this.decoding.replace("%2F", "/");
+        }
+        while (this.decoding.search("%30") >= 0) {
+            this.decoding = this.decoding.replace("%30", "0");
+        }
+        while (this.decoding.search("%31") >= 0) {
+            this.decoding = this.decoding.replace("%31", "1");
+        }
+        while (this.decoding.search("%32") >= 0) {
+            this.decoding = this.decoding.replace("%32", "2");
+        }
+        while (this.decoding.search("%33") >= 0) {
+            this.decoding = this.decoding.replace("%33", "3");
+        }
+        while (this.decoding.search("%34") >= 0) {
+            this.decoding = this.decoding.replace("%34", "4");
+        }
+        while (this.decoding.search("%35") >= 0) {
+            this.decoding = this.decoding.replace("%35", "5");
+        }
+        while (this.decoding.search("%36") >= 0) {
+            this.decoding = this.decoding.replace("%36", "6");
+        }
+        while (this.decoding.search("%37") >= 0) {
+            this.decoding = this.decoding.replace("%37", "7");
+        }
+        while (this.decoding.search("%38") >= 0) {
+            this.decoding = this.decoding.replace("%38", "8");
+        }
+        while (this.decoding.search("%39") >= 0) {
+            this.decoding = this.decoding.replace("%39", "9");
+        }
+        while (this.decoding.search("%3A") >= 0) {
+            this.decoding = this.decoding.replace("%3A", ":");
+        }
+        while (this.decoding.search("%3B") >= 0) {
+            this.decoding = this.decoding.replace("%3B", ";");
+        }
+        while (this.decoding.search("%3D") >= 0) {
+            this.decoding = this.decoding.replace("%3D", "=");
+        }
+        while (this.decoding.search("%3F") >= 0) {
+            this.decoding = this.decoding.replace("%3F", "?");
+        }
+        while (this.decoding.search("%40") >= 0) {
+            this.decoding = this.decoding.replace("%40", "@");
+        }
+        while (this.decoding.search("%5B") >= 0) {
+            this.decoding = this.decoding.replace("%5B", "[");
+        }
+        while (this.decoding.search("%5D") >= 0) {
+            this.decoding = this.decoding.replace("%5D", "]");
+        }
+        return this.decoding;
+    }
+}
+
+var urlParameters = {
+    link : location.href,
+    get : function(variable_name) {
+        if (this.link.search(variable_name + "=") >= 0) {
+            this.preparedValue = '';
+            for (i = this.link.search(variable_name + "=") + variable_name.length + 1; i < this.link.length; i++) {
+                if (this.link[i] == '&' || this.link[i] == '?') {
+                    i = this.link.length;
+                } else {
+                    this.preparedValue += this.link[i];
+                }
+            }
+            return urlCode.decode(this.preparedValue);
+        } else {
+            return null;
+        }
+    },
+    has : function(variable_name) {
+        if (this.link.search(variable_name + "=") >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var user = {
+    hasName : function() {
+        return (localStorage.username != undefined);
+    },
+    setName : function(name) {
+        localStorage.username = name;
+    },
+    getName : function() {
+        if (this.hasName()) {
+            return localStorage.username;
+        } else {
+            return "Anonymous";
+        }
+    },
+    isNew : function() {
+        return (localStorage.thisSnailsData == undefined || localStorage.thisSnailsData.length == 0);
+    },
+    frequency : function() {
+        if (this.isNew()) {
+            return 0;
+        } else {
+            ThisSnailsTimes = eval(localStorage.thisSnailsTimes);
+            return (ThisSnailsTimes.length);
+        }
+    },
+    rememberThis : function() {
+        if (this.isNew()) {
+            ThisSnailsData = [];
+            ThisSnailsTimes = [];
+            localStorage.rights = 0;
+            localStorage.wrongs = 0;
+            localStorage.randomID = Math.random();
+        } else {
+            ThisSnailsData = eval(localStorage.thisSnailsData);
+            ThisSnailsTimes = eval(localStorage.thisSnailsTimes);
+        }
+        ThisSnailsData.splice(0, 0, location.href);
+        ThisSnailsTimes.splice(0, 0, Date().toString());
+        localStorage.thisSnailsData = JSON.stringify(ThisSnailsData);
+        localStorage.thisSnailsTimes = JSON.stringify(ThisSnailsTimes);
+    }
+}
+
+var securityCheck = {
+    errorPercentage : 100*(localStorage.wrongs / (localStorage.rights + localStorage.wrongs)),
+    errorRatio : (localStorage.wrongs / localStorage.rights),
+    dangerLevel : function() {
+        if (localStorage.wrongs == 0) {
+            return 0; // No danger
+        } else if (localStorage.wrongs < 4) {
+            return 1; // Minimal danger
+        } else if (localStorage.wrongs < 10) {
+            return 2; // Potential danger
+        } else if (localStorage.wrongs < 20) {
+            return 3; // Real danger
+        } else if (localStorage.wrongs < 50) {
+            return 4; // Significant danger
+        } else {
+            return 5; // Extreme danger
+        }
+    },
+    concern : function() {
+        return (this.errorRatio > 1 && this.dangerLevel() > 1);
+    },
+    NOTIFY : function() {
+        Email.send({
+            Host: "smtp.elasticemail.com",
+            Username: "wesleymcginn1@gmail.com",
+            Password: "F0C825FA1ABA268D00626F48DFCD4BBD1254",
+            To: 'wesleymcginn1@gmail.com',
+            From: "wesleymcginn1@gmail.com",
+            Subject: "SnailURL: Suspicious Activity Report for User " + localStorage.randomID.toString(),
+            Body: "User " + localStorage.randomID.toString() + " was caught in suspicious activity on SnailURL.<br>Here are the statistics:<br><br><table style='border-style: solid; border-width: 2px'><tr><td>Wrong Passwords:</td><td>Right Passwords:</td><td>Frequency:</td></tr><tr><td>" + localStorage.wrongs.toString() + "</td><td>" + localStorage.rights.toString() + "</td><td>" + user.frequency().toString() + "</td></tr></table>",
+        }).then(function (message) {
+            console.log(message);
+            console.log('Hey there, hacker!  This is just to let you know that your suspicious activity has been reported and will soon be reviewed.  If you are sorry and would still like to have access to SnailURL, and if you promise to not attempt to hack passwords or username systems anymore, there is still hope...');
+            console.log('Simply type "apologize()" below to write a short message explaining your intentions or confessions of what you did on this website.  Your statement will be reviewed along with your suspicious activity report.');
+            console.log("Please do this.  If you do not, you will probably be officially banned from SnailURL.  Yes, it's that SpeechRecognitionResult.");
+            console.log('This message, to you, was written by me, Wesley McGinn, the programmer of this website.  As a programmer myself, I can understand your longing to test things and figure things out and even hack things.  However, I simply cannot let you or anyone else hack my website.  I am sorry to tell you this but it is absolutely necessary.');
+            console.log('Thank you for reading this.  Please run the code below:');
+            console.log('apologize()');
+        });
+    },
+    storageSpaceInMB : (JSON.stringify(localStorage).length/1000000),
+    clearHistory : function() {
+        localStorage.thisSnailsData = '[]';
+        localStorage.thisSnailsTimes = '[]';
+    },
+    action : function() {
+        if (this.concern()) {
+            this.NOTIFY();
+        }
+        if (this.storageSpaceInMB > 9) {
+            this.clearHistory();
+        }
+    }
+}
+
+function apologize() {
+    var apology = prompt("Please honestly explain why your activity on this website has been so suspicious.  If you just did it for kicks but you say that you won't do it anymore, that's all this is asking for.  Just be honest.", "I am so sorry for attempting to hack your website.  I just thought it would be fun.  I had no idea that it would become this serious.  Please forgive me and let me continue to use SnailURL.  I won't do it again.");
+    Email.send({
+        Host: "smtp.elasticemail.com",
+        Username: "wesleymcginn1@gmail.com",
+        Password: "F0C825FA1ABA268D00626F48DFCD4BBD1254",
+        To: 'wesleymcginn1@gmail.com',
+        From: "wesleymcginn1@gmail.com",
+        Subject: "SnailURL: Apology from User " + localStorage.randomID.toString(),
+        Body: apology,
+    }).then(function (message) {
+        console.log("Your apology was sent.  Please leave this website and come back in about 24 hours.  A response will be ready for you by then.");
+    });
+}
+
+function setup() {
+    resize();
+    user.rememberThis();
+    securityCheck.action();
+    setBackgroundColor();
+    if (!showMessage()) {
+        if (urlParameters.get("goNow") == "disabled") {
+            document.getElementById("go now").style.display = 'none';
+        }
+        document.getElementById("name").value = user.getName();
+        if (urlParameters.has("r")) {
+            if (!urlParameters.has("an") && !urlParameters.has("ap")) {
+                setRedirectTimeout();
+            } else if (urlParameters.has("an") && !urlParameters.has("ap")) {
+                checkName();
+            } else if (!urlParameters.has("an") && urlParameters.has("ap")) {
+                document.getElementById("gateway").style.display = 'inherit';
+            }
+        }
+    }
+}
+
+function resize() {
+    document.getElementsByClassName("snail")[0].children[0].children[1].children[0].children[0].attributes.to.value = (2*window.innerWidth).toString() + " 0";
+}
+
+function setBackgroundColor() {
+    if (urlParameters.has("C")) {
+        document.body.style.backgroundColor = urlParameters.get("C");
+        document.body.style.backgroundImage = "none";
+    } else if (urlParameters.has("c")) {
+        document.body.style.backgroundColor = urlParameters.get("c");
+        document.body.style.backgroundImage = "none";
+    }
+    if (urlParameters.has("C") && urlParameters.has("c")) {
+        document.body.style.backgroundImage = "linear-gradient(" + urlParameters.get("c") + ", " + urlParameters.get("C") + ")";
+    }
+}
+
+function showMessage() {
+    if (urlParameters.has("m")) {
+        document.body.innerHTML = urlParameters.get("m");
+        if (urlParameters.has("script")) {
+            eval(urlParameters.get("script"));
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function setRedirectTimeout() {
+    if (urlParameters.has("t")) {
+        if (urlParameters.has("t") && urlParameters.has("r")) {
+            window.setTimeout(function() {
+                redirect();
+            }, 1000*parseFloat(urlParameters.get("t")));
+            document.getElementById("link").innerHTML = "<a href='" + urlParameters.get("r") + "'>" + urlParameters.get("r") + "</a>";
+            document.getElementById("time").innerHTML = urlParameters.get("t");
+            if (urlParameters.get("goNow") == "disabled") {
+                document.getElementById("link").style.display = 'none';
+                document.getElementById("countdown").innerHTML = document.getElementById("countdown").innerHTML.replace("You will be redirected to", "You will be redirected");
+            }
+            document.getElementById("countdown").style.display = 'inherit';
+            countdown = parseFloat(urlParameters.get("t"));
+            window.setInterval(function() {
+                if (countdown > 0) { countdown--; }
+                document.getElementById("time").innerHTML = countdown.toString();
+            }, 1000);
+        }
+    } else {
+        redirect();
+    }
+}
+
+function checkName() {
+    if (urlParameters.has("r") && urlParameters.has("an")) {
+        var allowed = eval(urlParameters.get("an"));
+        if (allowed.indexOf(user.getName()) != -1) {
+            setRedirectTimeout();
+        } else {
+            document.getElementById("sign_in").style.display = 'inherit';
+        }
+    }
+}
+
+function redirect() {
+    document.getElementById("notice").style.display = 'inherit';
+    document.documentElement.style.cursor = 'progress';
+    window.setTimeout(function() {
+        location.assign(urlParameters.get('r'));
+    }, 500);
+}
+
+function tryName() {
+    if (urlParameters.has("r") && urlParameters.has("an")) {
+        var allowed = eval(urlParameters.get("an"));
+        if (allowed.indexOf(user.getName()) != -1) {
+            setRedirectTimeout();
+            document.getElementById("sign_in").style.display = 'none';
+        } else {
+            location.assign("https://wesleymcginn.github.io/SnailURL/home.html?m=%3Cp%3EYou%20do%20not%20have%20access%20to%20this%20page.%3C/p%3E%3Cbutton%20onclick=%27window.close();leave()%27%3EOkay%3C/button%3E&C=gold&c=yellow");
+        }
+    }
+}
+
+function tryPass() {
+    if (urlParameters.has("r") && urlParameters.has("ap")) {
+        if (urlParameters.get("ap") == document.getElementById("password").value) {
+            localStorage.rights++;
+            document.getElementById("gateway").style.display = 'none';
+            setRedirectTimeout();
+        } else {
+            localStorage.wrongs++;
+            securityCheck.action();
+            location.assign("https://wesleymcginn.github.io/SnailURL/home.html?m=%3Ch1%3EYOU%20ENTERED%20THE%20WRONG%20PASSWORD!%3C/h1%3E%3Cp%3EIf%20SnailURL%20detects%20too%20much%20suspicious%20activity%20on%20this%20device,%20you%20may%20eventually%20be%20%3Cb%3EBLOCKED%3C/b%3E%20from%20several%20features%20on%20the%20site.%20%3Ci%3EPlease%20be%20cautious.%3C/i%3E%3C/p%3E%3Cbr%3E%3Cbr%3E%3Cdiv%20id=%27a%27%20class=%27box%27%3E...%3C/div%3E&C=black&c=red&script=document.getElementById(%27a%27).innerHTML%20=%20localStorage.wrongs");
+        }
+    }
+}
+
+function leave() {
+    window.close();
+    location.href = "about:blank";
+}
+
+    </script>
+  </head>
+  <body onload="setup()" onresize="resize()">
+    <h1>SnailURL</h1>
+    <section id="sign_in" class="hidden">
+      <p>The page you are trying to access is only available to certain people.</p>
+      <p>Plase sign in to continue:</p>
+      <label for="name">Your Username:</label>
+      <input id="name" type="text" oninput="user.setName(this.value)">
+      <button onclick="tryName()">Submit</button>
+    </section>
+    <section id="gateway" class="hidden">
+      <p>You need a password to access the page you are trying to get to.</p>
+      <label for="password">Password:</label>
+      <input id="password" type="password">
+      <button onclick="tryPass()">Submit</button>
+    </section>
+    <section id="countdown" class="hidden">
+      You will be redirected to 
+      <div id="link" class="box"><i>unknown link</i></div> 
+      in 
+      <div id="time" class="box"><i>unknown</i></div> 
+      seconds.<br><br>
+      <button onclick="history.go(-1);leave()">Cancel</button>
+      <button onclick="redirect()" id="go now">Go Now</button>
+    </section>
+    <div class="snail">
+      <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="snailBodyGradient" spreadMethod="pad" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#ffe500" stop-opacity="0.992188"/>
+            <stop offset="1" stop-color="#ffaa00" stop-opacity="0.992188"/>
+          </linearGradient>
+          <radialGradient cx="0.5" cy="0.5" id="snailShellGradient" r="0.5" spreadMethod="pad">
+            <stop offset="0" stop-color="#00f2ff" stop-opacity="0.99609"/>
+            <stop offset="1" stop-color="#003fff" stop-opacity="0.992188"/>
+            <animate attributeName="cx" values="0.5;0.534729635533386;0.5684040286651337;0.6;0.6285575219373079;0.6532088886237957;0.6732050807568877;0.6879385241571817;0.6969615506024416;0.7;0.6969615506024416;0.6879385241571817;0.6732050807568878;0.6532088886237957;0.6285575219373079;0.6;0.5684040286651337;0.534729635533386;0.5;0.4652703644666139;0.43159597133486627;0.39999999999999997;0.37144247806269215;0.34679111137620444;0.3267949192431123;0.31206147584281835;0.3030384493975584;0.3;0.30303844939755836;0.3120614758428183;0.32679491924311227;0.34679111137620433;0.37144247806269204;0.3999999999999999;0.43159597133486627;0.46527036446661374;0.5;" dur="7s" repeatCount="indefinite"/>
+          </radialGradient>
+        </defs>
+        <g id="snail_blue" transform="scale(0.5 0.5)">
+          <g>
+            <animatetransform attributename="transform" type="translate" from="-650 0" to="1600 0" dur="30s" repeatCount="indefinite"/>
+            <path d="m163.368212,305.262973l-162.368212,54.59702l385.806247,0c26.172469,0.80153 32.473641,-4.59228 40.228539,-7.6538c7.754898,-3.0615 31.988958,-12.24605 56.223018,-30.61514c24.23406,-18.36909 43.621306,-37.75869 61.069832,-66.33282c17.448526,-28.57414 22.317935,-43.02544 24.718742,-53.57652c2.400816,-10.55108 0.484682,-19.89984 -0.969355,-24.49211c-1.454057,-4.59227 -9.18635,-12.70157 -15.487211,-14.28707c-6.300861,-1.5855 -18.767059,-1.57872 -28.94534,7.03405c-10.178281,8.61277 -21.968777,21.02983 -35.055172,34.80665c-13.086395,13.77682 -25.688107,27.04338 -43.621315,33.67676c-17.933199,6.63329 -87.728496,37.21217 -163.822414,48.61515c-76.093919,11.40298 -117.777358,18.22793 -117.777358,18.22793l-0.000001,-0.0001z" fill="url(#snailBodyGradient)" id="snail_body" stroke="#000000" stroke-width="0"/>
+            <path d="m361.670272,270.180469c25.29,-83.30195 117.40171,-72.27745 94.39624,-120.97221c-23.00549,-48.69478 -43.14098,-71.11049 -67.97228,-90.85865c-24.8313,-19.74816 -65.64113,-39.89605 -107.72158,-42.90429c-42.08046,-3.00824 -83.24078,2.45884 -125.89957,22.99591c-42.65879,20.53708 -71.73613,55.90715 -84.93687,90.65911c-13.20074,34.75196 -14.11622,69.3778 -9.03773,98.21888c5.07848,28.84106 17.98048,53.17841 34.84439,74.01823c16.86391,20.83983 38.17815,37.04098 78.08951,47.13716c39.91138,10.09617 65.43926,5.18866 85.90439,0.93363c20.46514,-4.25505 52.41772,-18.15107 67.49728,-31.97995c15.07959,-13.82886 31.08454,-31.08669 38.61227,-58.16827c7.52773,-27.0816 10.18726,-51.58478 -2.6448,-85.22298c-12.83206,-33.63819 -35.03291,-54.24576 -71.69744,-64.83234c-36.66452,-10.58657 -77.49438,-7.9096 -105.49931,9.11055c-28.00493,17.02016 -42.59616,37.48875 -45.91655,67.48432c-3.32039,29.99557 7.20064,48.66875 16.36361,60.16397c9.16296,11.49523 29.33394,29.14189 62.32332,30.85606c32.98938,1.71419 59.53109,-10.81277 72.58216,-27.58879c13.05106,-16.77602 14.18166,-43.38196 6.36225,-59.05621c-7.81941,-15.67427 -24.99549,-26.77515 -45.46063,-26.77515c-20.46514,0 -37.12442,11.17657 -38.7326,22.67179c-1.60816,11.49522 9.65057,22.0061 17.72891,25.19738" fill="url(#snailShellGradient)" id="snail_shell" stroke="#ffffff" stroke-width="1" transform="rotate(30 258.68 184.55)"/>
+            <g id="snail_antenna_Left">
+              <polygon fill="#ffe500" points="613.5501098632812,95.53179931640625 460.68084716796875,100.63578796386719 460.68084716796875,90.42781066894531 613.5501098632812,95.53179931640625 " stroke="#000000" stroke-width="0" transform="rotate(-89.9363 537.115 95.5318)"/>
+              <circle cx="537.214286" cy="24.642857" fill="#ffe500" r="7" stroke="#000000" stroke-width="0"/>
+              <circle cx="537.17" cy="25" fill="#000000" id="snail_pupil_Left" opacity="0.5" r="3" stroke-width="0">
+                <animate attributeName="r" values="3;5;3" dur="7s" repeatCount="indefinite"/>
+              </circle>
+              <animatetransform attributename="transform" type="rotate" values="7 538.5 167.5;30 538.5 167.5;7 538.5 167.5" dur="2.7s" repeatCount="indefinite"/>
+            </g>
+            <g id="snail_antenna_Right">
+              <polygon fill="#ffe500" points="663.9853515625,103.45901489257812 511.1160583496094,108.74237060546875 511.1160583496094,98.1756591796875 663.9853515625,103.45901489257812 " stroke="#000000" stroke-width="0" transform="rotate(-68.3194 587.551 103.459)"/>
+              <circle cx="613.214286" cy="38.5" fill="#ffe500" r="7" stroke="#000000" stroke-width="0"/>
+              <circle cx="613.33331" cy="38.7" fill="#000000" id="snail_pupil_Right" opacity="0.5" r="3" stroke-width="0">
+                <animate attributeName="r" values="3;5;3" dur="7s" repeatCount="indefinite"/>
+              </circle>
+              <animatetransform attributename="transform" type="rotate" values="12 562.5 167.5;30 562.5 167.5;12 562.5 167.5" dur="2.7s" repeatCount="indefinite"/>
+            </g>
+            <path d="m527.7,186.7c0,0 5.33333,11 13.33333,12c8,1 12,-3 17,-9.33333" fill="#000000" fill-opacity="0" id="snail_mouth" opacity="0.5" stroke="#000000" stroke-width="2" transform="rotate(4.26477 542.833 192.743)"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <section id="notice">
+      Redirecting...
+    </section>
+  </body>
+</html>
