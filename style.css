@@ -58,6 +58,14 @@ button, input, .hidden, .box {
     border-radius: 20px;
 }
 
+.snail {
+    position: fixed;
+    bottom: -5px;
+    left: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
 #notice {
     display: none;
     position: fixed;

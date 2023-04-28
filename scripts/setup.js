@@ -1,4 +1,5 @@
 function setup() {
+    document.getElementsByClassName("snail")[0].children[0].children[1].children[0].children[0].attributes.to.value = (2*window.innerWidth).toString() + " 0";
     user.rememberThis();
     securityCheck.action();
     setBackgroundColor();
@@ -17,6 +18,10 @@ function setup() {
             }
         }
     }
+}
+
+function resize() {
+    document.getElementsByClassName("snail")[0].children[0].children[1].children[0].children[0].attributes.to.value = (2*window.innerWidth).toString() + " 0";
 }
 
 function setBackgroundColor() {
