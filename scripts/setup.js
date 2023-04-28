@@ -1,5 +1,5 @@
 function setup() {
-    document.getElementsByClassName("snail")[0].children[0].children[1].children[0].children[0].attributes.to.value = (2*window.innerWidth).toString() + " 0";
+    resize();
     user.rememberThis();
     securityCheck.action();
     setBackgroundColor();
