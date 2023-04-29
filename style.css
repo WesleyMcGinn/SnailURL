@@ -89,6 +89,9 @@ button, input:not([type="color"]):not([type="checkbox"]), .hidden, .box {
     h1 {
         font-size: 27pt;
     }
+    .snail_shell {
+        stroke-width: 3px;
+    }
     #notice {
         font-size: 20pt;
     }
