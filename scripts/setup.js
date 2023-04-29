@@ -3,6 +3,12 @@ function setup() {
     user.rememberThis();
     securityCheck.action();
     setBackgroundColor();
+    if (urlParameters.has("snaily")) {
+        snail = urlParameters.get("snaily");
+        if (snail == "none" || snail == "no" || snail == "disabled") {
+            document.getElementsByClassName("snail")[0].style.display = "none";
+        }
+    }
     if (!showMessage()) {
         if (urlParameters.get("goNow") == "disabled") {
             document.getElementById("go now").style.display = 'none';
@@ -39,7 +45,7 @@ function setBackgroundColor() {
 
 function showMessage() {
     if (urlParameters.has("m")) {
-        document.body.innerHTML = urlParameters.get("m");
+        document.getElementById("content").innerHTML = urlParameters.get("m");
         if (urlParameters.has("script")) {
             eval(urlParameters.get("script"));
         }

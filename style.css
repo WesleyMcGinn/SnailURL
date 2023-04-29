@@ -22,7 +22,7 @@ h1 {
     border-radius: 20px;
 }
 
-button, input {
+button, input:not([type="color"]):not([type="checkbox"]) {
     text-align: center;
     background-color: azure;
     background-image: linear-gradient(azure, lightgrey);
@@ -37,7 +37,7 @@ button:hover, input:hover {
     cursor: pointer;
 }
 
-input:hover {
+input:not([type="color"]):not([type="checkbox"]):hover {
     cursor: text;
 }
 
@@ -53,7 +53,7 @@ input:hover {
     font-family: Righteous, Verdana, Tahoma, sans-serif;
 }
 
-button, input, .hidden, .box {
+button, input:not([type="color"]):not([type="checkbox"]), .hidden, .box {
     padding: 14px;
     border-radius: 20px;
 }
