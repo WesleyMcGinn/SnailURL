@@ -7,6 +7,8 @@ function setup() {
         snail = urlParameters.get("snaily");
         if (snail == "none" || snail == "no" || snail == "disabled") {
             document.getElementsByClassName("snail")[0].style.display = "none";
+        } else {
+            document.getElementsByClassName("snail")[0].style.display = '';
         }
     }
     if (!showMessage()) {
