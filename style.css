@@ -64,6 +64,7 @@ button, input:not([type="color"]):not([type="checkbox"]), .hidden, .box {
     left: 0px;
     padding: 0px;
     width: 100%;
+    display: none;
 }
 
 #notice {
