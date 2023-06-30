@@ -8,7 +8,7 @@ function setup() {
         if (snail == "none" || snail == "no" || snail == "disabled") {
             document.getElementsByClassName("snail")[0].style.display = "none";
         } else {
-            document.getElementsByClassName("snail")[0].style.display = '';
+            document.getElementsByClassName("snail").style.display = '';
         }
     }
     if (!showMessage()) {
