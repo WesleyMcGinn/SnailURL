@@ -5,6 +5,8 @@ A free-to-use website with which you can create redirect links of various types,
 In a URL, there are often parameters.  For example, if on pretendExampleSite.com you want to set "color" to 5 and "id" to "something", the URL may look something like this: `pretendExampleSite.com/?color=5&id=something`.
 
 The URL parameters for this website go as follows:
+
+
 | Parameter | What | Example |
 | :-: | :-: | :-: |
 | m | Message to display | `?m=Hello` |
@@ -16,6 +18,7 @@ The URL parameters for this website go as follows:
 | ap | Encoded password | `?ap=qr#$$(abb^**@4.2r}..dq` |
 | s | Security Token | `?s=557248829011730` |
 | script | Javascript code to run with message display | `?script=alert("Hello.")` |
+
 
 All typable characters are allowed in the url parameter values except for "?", "&", and "=", since these characters are used for discerning where each parameter is located.
 
