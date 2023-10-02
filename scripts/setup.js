@@ -1,5 +1,4 @@
 function setup() {
-    resize();
     setBackgroundColor();
     if (urlParameters.has("snaily")) {
         snail = urlParameters.get("snaily");
