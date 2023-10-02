@@ -87,16 +87,16 @@ function setRedirectTimeout() {
                 redirect();
             }, 1000 * parseFloat(urlParameters.get("t")));
             console.log("Redirect Timeout Set");
+            countdown = Math.floor(parseFloat(urlParameters.get("t")));
+            document.getElementById("time").innerHTML = countdown.toString();
             document.getElementById("link").innerHTML = "<a href='" + urlParameters.get("r") + "'>" + urlParameters.get("r") + "</a>";
-            document.getElementById("time").innerHTML = urlParameters.get("t");
             if (urlParameters.has("goNow")) {
                 if (["0", "no", "none", "off", "nope", "false", "hide", "invisible"].includes(urlParameters.get("goNow").toLowerCase())) {
-                    document.getElementById("link").style.display = 'none';
+                    document.getElementById("link").style.display = "none";
                     document.getElementById("countdown").innerHTML = document.getElementById("countdown").innerHTML.replace("You will be redirected to", "You will be redirected");
                 }
             }
             document.getElementById("countdown").style.display = 'inherit';
-            countdown = Math.floor(parseFloat(urlParameters.get("t")));
             window.setInterval(function() {
                 if (countdown > 0) { countdown--; }
                 document.getElementById("time").innerHTML = countdown.toString();
