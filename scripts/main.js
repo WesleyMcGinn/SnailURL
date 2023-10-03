@@ -134,7 +134,7 @@ function tryName() {
             setRedirectTimeout();
             document.getElementById("sign_in").style.display = "none";
         } else {
-            location.assign("./home.html?m=%3Cp%3EYou%20do%20not%20have%20access%20to%20this%20page.%3C/p%3E%3Cbutton%20onclick=%27window.close();leave()%27%3EOkay%3C/button%3E&C=gold&c=yellow");
+            location.assign("./home.html?m=%3Cp%3EYou%20do%20not%20have%20access%20to%20this%20page.%3C/p%3E%3Cbutton%20onclick=%27window.close();leave()%27%3EOkay%3C/button%3E&C=gold&c=yellow&snail=0");
         }
     }
 }
@@ -152,7 +152,7 @@ function tryPass() {
             if (localStorage.wrongs > 4 && localStorage.rights < localStorage.wrongs) {
                 localStorage.BLOCKED = '1';
             }
-            location.assign("./home.html?m=%3Ch1%3EYOU%20ENTERED%20THE%20WRONG%20PASSWORD!%3C/h1%3E%3Cp%3EIf%20SnailURL%20detects%20too%20much%20suspicious%20activity%20on%20this%20device,%20you%20may%20eventually%20be%20%3Cb%3EBLOCKED%3C/b%3E%20from%20this%20site.%20%3Ci%3EPlease%20be%20cautious!%3C/i%3E%3C/p%3E%3Cbr%3E%3Cbr%3E%3Cdiv%20id=%27a%27%20class=%27box%27%3E...%3C/div%3E&C=black&c=red&script=document.getElementById(%27a%27).innerHTML%20=%20localStorage.wrongs");
+            location.assign("./home.html?m=%3Ch1%3EYOU%20ENTERED%20THE%20WRONG%20PASSWORD!%3C/h1%3E%3Cp%3EIf%20SnailURL%20detects%20too%20much%20suspicious%20activity%20on%20this%20device,%20you%20may%20eventually%20be%20%3Cb%3EBLOCKED%3C/b%3E%20from%20this%20site.%20%3Ci%3EPlease%20be%20cautious!%3C/i%3E%3C/p%3E%3Cbr%3E%3Cbr%3E%3Cdiv%20id=%27a%27%20class=%27box%27%3E...%3C/div%3E&C=black&c=red&script=document.getElementById(%27a%27).innerHTML%20=%20localStorage.wrongs&snail=0");
         }
     }
 }
