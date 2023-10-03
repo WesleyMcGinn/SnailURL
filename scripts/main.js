@@ -108,9 +108,13 @@ function setRedirectTimeout() {
 }
 
 function redirect() {
+    document.title = "SnailURL - REDIRECTING."
     console.log("Redirecting....");
     document.getElementById("notice").style.display = "inherit";
     document.documentElement.style.cursor = "progress";
+    window.setInterval(function() {
+        document.title += ".";
+    }, 400);
     window.setTimeout(function() {
         location.assign(urlParams.get("r"));
     }, 800);
