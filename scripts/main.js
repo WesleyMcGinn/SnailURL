@@ -1,32 +1,32 @@
 function setBackgroundColor() {
-    if (urlParameters.has("C")) {
-        document.body.style.backgroundColor = urlParameters.get("C");
+    if (urlParams.has("C")) {
+        document.body.style.backgroundColor = urlParams.get("C");
         document.body.style.backgroundImage = "none";
         console.log("Background Color Set");
-    } else if (urlParameters.has("c")) {
-        document.body.style.backgroundColor = urlParameters.get("c");
+    } else if (urlParams.has("c")) {
+        document.body.style.backgroundColor = urlParams.get("c");
         document.body.style.backgroundImage = "none";
         console.log("Background Color Set - Alternative Method");
     }
-    if (urlParameters.has("C") && urlParameters.has("c")) {
-        document.body.style.backgroundImage = "linear-gradient(" + urlParameters.get("c") + ", " + urlParameters.get("C") + ")";
+    if (urlParams.has("C") && urlParams.has("c")) {
+        document.body.style.backgroundImage = "linear-gradient(" + urlParams.get("c") + ", " + urlParams.get("C") + ")";
         console.log("Background Gradient Set");
     }
 }
 
 function showSnail() {
-    if (urlParameters.has("snail")) {
-        if (["0", "no", "none", "off", "nope", "false", "hide", "invisible"].includes(urlParameters.get("snail").toLowerCase())) {
+    if (urlParams.has("snail")) {
+        if (["0", "no", "none", "off", "nope", "false", "hide", "invisible"].includes(urlParams.get("snail").toLowerCase())) {
             console.log("Snail Disabled by URL Parameter");
         } else {
             mySnail.run();
             console.log("Snail Enabled by URL Parameter");
             return true;
         }
-    } else if (urlParameters.has("r") && !urlParameters.has("t") && !urlParameters.has("ap") && !urlParameters.has("an")) {
+    } else if (urlParams.has("r") && !urlParams.has("t") && !urlParams.has("ap") && !urlParams.has("an")) {
         console.log("Snail Disabled by Instant Redirect");
-    } else if (urlParameters.has("t") && !urlParameters.has("ap") && !urlParameters.has("an")) {
-        if (parseFloat(urlParameters.get("t")) < 4) {
+    } else if (urlParams.has("t") && !urlParams.has("ap") && !urlParams.has("an")) {
+        if (parseFloat(urlParams.get("t")) < 4) {
             console.log("Snail Disabled by Instant Timer (< 4s)");
         } else {
             mySnail.run();
@@ -42,12 +42,12 @@ function showSnail() {
 }
 
 function showMessage() {
-    if (urlParameters.has("m")) {
-        document.getElementById("content").innerHTML = urlParameters.get("m");
+    if (urlParams.has("m")) {
+        document.getElementById("content").innerHTML = urlParams.get("m");
         console.log("Message Shown");
-        if (urlParameters.has("script")) {
+        if (urlParams.has("script")) {
             console.log("Running URL Parameter Script....");
-            eval(urlParameters.get("script"));
+            eval(urlParams.get("script"));
             console.log("URL Parameter Script Was Run.");
         }
         return true;
@@ -58,8 +58,8 @@ function showMessage() {
 }
 
 function hideGoNowButton() {
-    if (urlParameters.has("goNow")) {
-        if (["0", "no", "none", "off", "nope", "false", "hide", "invisible"].includes(urlParameters.get("goNow").toLowerCase())) {
+    if (urlParams.has("goNow")) {
+        if (["0", "no", "none", "off", "nope", "false", "hide", "invisible"].includes(urlParams.get("goNow").toLowerCase())) {
             document.getElementById("go now").style.display = "none";
             console.log('"Go Now" Button Removed');
             return true;
@@ -81,17 +81,17 @@ function rememberName(name) {
 }
 
 function setRedirectTimeout() {
-    if (urlParameters.has("t")) {
-        if (urlParameters.has("t") && urlParameters.has("r")) {
+    if (urlParams.has("t")) {
+        if (urlParams.has("t") && urlParams.has("r")) {
             window.setTimeout(function() {
                 redirect();
-            }, 1000 * parseFloat(urlParameters.get("t")));
+            }, 1000 * parseFloat(urlParams.get("t")));
             console.log("Redirect Timeout Set");
-            countdown = Math.floor(parseFloat(urlParameters.get("t")));
+            countdown = Math.floor(parseFloat(urlParams.get("t")));
             document.getElementById("time").innerHTML = countdown.toString();
-            document.getElementById("link").innerHTML = "<a href='" + urlParameters.get("r") + "'>" + urlParameters.get("r") + "</a>";
-            if (urlParameters.has("goNow")) {
-                if (["0", "no", "none", "off", "nope", "false", "hide", "invisible"].includes(urlParameters.get("goNow").toLowerCase())) {
+            document.getElementById("link").innerHTML = "<a href='" + urlParams.get("r") + "'>" + urlParams.get("r") + "</a>";
+            if (urlParams.has("goNow")) {
+                if (["0", "no", "none", "off", "nope", "false", "hide", "invisible"].includes(urlParams.get("goNow").toLowerCase())) {
                     document.getElementById("link").style.display = "none";
                     document.getElementById("countdown").innerHTML = document.getElementById("countdown").innerHTML.replace("You will be redirected to", "You will be redirected");
                 }
@@ -112,13 +112,13 @@ function redirect() {
     document.getElementById("notice").style.display = "inherit";
     document.documentElement.style.cursor = "progress";
     window.setTimeout(function() {
-        location.assign(urlParameters.get("r"));
+        location.assign(urlParams.get("r"));
     }, 800);
 }
 
 function checkName() {
-    if (urlParameters.has("r") && urlParameters.has("an")) {
-        var allowed = eval(urlParameters.get("an"));
+    if (urlParams.has("r") && urlParams.has("an")) {
+        var allowed = eval(urlParams.get("an"));
         if (allowed.includes(recallName())) {
             setRedirectTimeout();
         } else {
@@ -128,8 +128,8 @@ function checkName() {
 }
 
 function tryName() {
-    if (urlParameters.has("r") && urlParameters.has("an")) {
-        var allowed = eval(urlParameters.get("an"));
+    if (urlParams.has("r") && urlParams.has("an")) {
+        var allowed = eval(urlParams.get("an"));
         if (allowed.includes(recallName())) {
             setRedirectTimeout();
             document.getElementById("sign_in").style.display = "none";
@@ -142,8 +142,8 @@ function tryName() {
 function tryPass() {
     if (localStorage.rights == undefined) { localStorage.rights = 0; }
     if (localStorage.wrongs == undefined) { localStorage.wrongs = 0; }
-    if (urlParameters.has("r") && urlParameters.has("ap")) {
-        if (urlParameters.get("ap") == document.getElementById("password").value) {
+    if (urlParams.has("r") && urlParams.has("ap")) {
+        if (urlParams.get("ap") == document.getElementById("password").value) {
             localStorage.rights++;
             document.getElementById("gateway").style.display = "none";
             setRedirectTimeout();
@@ -168,8 +168,8 @@ function leave() {
 
 function setup() {
     if (localStorage.BLOCKED == '1') {
-        if (urlParameters.has("apology")) {
-            if (urlParameters.get("apology") == "pleaseunblockmeiwontdoiteveragainplease") {
+        if (urlParams.has("apology")) {
+            if (urlParams.get("apology") == "pleaseunblockmeiwontdoiteveragainplease") {
                 localStorage.clear();
             }
         }
@@ -180,12 +180,12 @@ function setup() {
         showMessage();
         hideGoNowButton();
         recallName();
-        if (urlParameters.has("r")) {
-            if (!urlParameters.has("an") && !urlParameters.has("ap")) {
+        if (urlParams.has("r")) {
+            if (!urlParams.has("an") && !urlParams.has("ap")) {
                 setRedirectTimeout();
-            } else if (urlParameters.has("an") && !urlParameters.has("ap")) {
+            } else if (urlParams.has("an") && !urlParams.has("ap")) {
                 checkName();
-            } else if (!urlParameters.has("an") && urlParameters.has("ap")) {
+            } else if (!urlParams.has("an") && urlParams.has("ap")) {
                 document.getElementById("gateway").style.display = 'inherit';
             }
         }

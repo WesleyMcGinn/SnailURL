@@ -110,7 +110,7 @@ var urlCode = {
     }
 }
 
-var urlParameters = {
+var urlParams = {
     link : location.href,
     get : function(variable_name) {
         if (this.link.search(variable_name + "=") >= 0) {
