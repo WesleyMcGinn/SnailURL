@@ -6,10 +6,15 @@ A free-to-use website with which you can create redirect links of various types,
  - A link that has a countdown timer before redirecting
  - A link that shows a message before redirecting
 
-### URL Parameters
-In a URL, there are often parameters.  For example, if on pretendExampleSite.com you want to set "color" to 5 and "id" to "something", the URL may look something like this: `pretendExampleSite.com/?color=5&id=something`.
+### Why Would I Want To Use This?  One Example:
+You want to send a link to your friends, but you only want your friends to have access to the link.  You also want your friends to know not to click the green button on the website, but you only want them to get this information if they decide to click the link you sent them.
 
-The URL parameters for this website work like this:
+With SnailURL, this can be easily accomplished!  You can have your friends click a SnailURL link that takes them to a page where they must enter their name to proceed (or not), making other people unable to access the link.  They are then shown your message about not clicking the green button, while a countdown timer below the message states that "you will be redirected to [link] in [countdown] seconds".  If they finish reading your message early, they can click the "Go Now" button to skip the timer.  If they don't want to visit the link, they can click "Cancel", closing the tab.
+
+### URL Parameters
+In a URL, there are often parameters.  For example, if on pretendExampleSite.com you want to set `color` to `5` and `id` to `"something"`, the URL may look something like this: `pretendExampleSite.com/?color=5&id=something`.
+
+The URL parameters for SnailURL work like this:
 
 
 | Parameter | What It Is | Example |
@@ -24,7 +29,7 @@ The URL parameters for this website work like this:
 | script | Javascript code to run with message display | `?script=alert("Hello.")` |
 
 
-Almost all typable characters are allowed in the url parameter values except for "?", "&", "#", "/", and "=", since these characters are used for discerning where each parameter is located.  A UI will be available soon to make it easier to create these links, but for now you can use URL encoding. (exaple: "]" = "%5D")
+Almost all typable characters are allowed in the url parameter values except for "?", "&", and "=", since these characters are used for discerning where each parameter is located.  A UI will be available soon to make it easier to create these links, but for now you can use URL encoding for strange characters. (exaple: "]" = "%5D")
 
 ### Example:
 Suppose you entered this parameter list:
