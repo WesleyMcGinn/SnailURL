@@ -133,5 +133,12 @@ var urlParameters = {
         } else {
             return false;
         }
+    },
+    none : function() {
+        if (this.link.search("?") < 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
